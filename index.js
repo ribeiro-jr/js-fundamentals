@@ -14,12 +14,12 @@ function getUser(callback) {
   }, 2000)
 }
 
-function getTelephoneByUserId(userId) {
+function getTelephoneByUserId(userId, callback) {
   setTimeout(() => {
-    return {
+    return callback(null, {
       number: 999999999,
       ddd: 244
-    }
+    })
   }, 2000)
 }
 
@@ -37,7 +37,15 @@ getUser((error, user) => {
   if (error) {
     console.log('can not get user data', error);
   }
-  console.log('user: ', user)
+
+  getTelephoneByUserId(user.id, (telephoneError, telephone) => {
+    if (error) {
+      console.log('can not get telephone data', telephoneError);
+    }
+
+    console.log('user: ', user, '\ntelephone: ', telephone);
+
+  })
 })
 
 // const telephone = getTelephoneByUserId(user.id)
