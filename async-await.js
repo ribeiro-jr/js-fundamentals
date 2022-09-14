@@ -43,8 +43,14 @@ async function main() {
   console.time()
   try {
     const user = await getUser()
-    const telephone = await getTelephoneByUserIdAsync(user.id)
-    const address = await getAddressByUserId(user.id)
+
+    const additionalData = await Promise.all([
+      getTelephoneByUserIdAsync(user.id),
+      getAddressByUserId(user.id)
+    ])
+
+    const telephone = additionalData[0]
+    const address = additionalData[1]
 
     console.log('user: ', user, '\ntelephone: ', telephone, '\naddress: ', address,);
   } catch (error) {
