@@ -4,13 +4,13 @@
  * 2 - get address by user id
  */
 
-function getUser() {
+function getUser(callback) {
   setTimeout(() => {
-    return {
+    return callback(null, {
       id: 1,
       name: 'Vanilson Ribeiro',
       age: 23
-    }
+    })
   }, 2000)
 }
 
@@ -32,8 +32,15 @@ function getAddressByUserId(userId) {
   }, 2000)
 }
 
-const user = getUser()
-const telephone = getTelephoneByUserId(user.id)
-const address = getAddressByUserId(user.id)
+getUser((error, user) => {
 
-console.log('user: ', user, 'telephone: ', telephone, 'address: ', address);
+  if (error) {
+    console.log('can not get user data', error);
+  }
+  console.log('user: ', user)
+})
+
+// const telephone = getTelephoneByUserId(user.id)
+// const address = getAddressByUserId(user.id)
+
+// console.log('user: ', user, 'telephone: ', telephone, 'address: ', address);
