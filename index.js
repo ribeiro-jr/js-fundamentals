@@ -23,12 +23,12 @@ function getTelephoneByUserId(userId, callback) {
   }, 2000)
 }
 
-function getAddressByUserId(userId) {
+function getAddressByUserId(userId, callback) {
   setTimeout(() => {
-    return {
+    return callback(null, {
       street: 'Rainha Ginga',
       number: 3
-    }
+    })
   }, 2000)
 }
 
@@ -43,7 +43,13 @@ getUser((error, user) => {
       console.log('can not get telephone data', telephoneError);
     }
 
-    console.log('user: ', user, '\ntelephone: ', telephone);
+    getAddressByUserId(user.id, (addressError, address) => {
+      if (error) {
+        console.log('can not get address data', addressError);
+      }
+
+      console.log('user: ', user, '\ntelephone: ', telephone, '\naddress: ', address);
+    })
 
   })
 })
