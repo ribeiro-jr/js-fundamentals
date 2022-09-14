@@ -53,8 +53,3 @@ getUser((error, user) => {
 
   })
 })
-
-// const telephone = getTelephoneByUserId(user.id)
-// const address = getAddressByUserId(user.id)
-
-// console.log('user: ', user, 'telephone: ', telephone, 'address: ', address);
